@@ -30,15 +30,13 @@ public class Task04 {
     }
 
     private void CheckCubeClearance() {
-        // Проверка по z
+        CheckOnZ();
+        CheckOnY();
+    }
+
+    private void CheckOnZ() {
         for (int x = 0; x < cube.length; x++){
             for (int y = 0; y < cube.length; y++){
-//                if (cube[x][y][0] == 0
-//                    && cube[x][y][0] == cube[x][y][1]
-//                    && cube[x][y][1] == cube[x][y][2]){
-//                    System.out.println(" Просвет по Z плоскости");
-//                    System.out.println(" По координатам: " + "x = " + x + ", y = " + y);
-//                }
 
                 if (cube[x][y][0] == 0){
                     for (int z = 0; z < cube.length - 1; z++){
@@ -53,6 +51,33 @@ public class Task04 {
                                 // Выводим результат.
                                 System.out.println(" Просвет по Z плоскости");
                                 System.out.println(" По координатам: " + "x = " + x + ", y = " + y);
+                            }
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private void CheckOnY() {
+        for (int x = 0; x < cube.length; x++){
+            for (int z = 0; z < cube.length; z++){
+
+                if (cube[x][0][z] == 0){
+                    for (int y = 0; y < cube.length - 1; y++){
+                        if (cube[x][y][z] == cube[x][y + 1][z]){
+                            // Если не предпоследний
+                            if ((y + 1) != cube.length - 1){
+                                // Проверим следующие кубики в массиве.
+                                continue;
+                            }
+                            else {
+                                // Проверили все кубики в массиве.
+                                // Выводим результат.
+                                System.out.println(" Просвет по Y плоскости");
+                                System.out.println(" По координатам: " + "x = " + x + ", z = " + z);
                             }
                         }
                         else {
