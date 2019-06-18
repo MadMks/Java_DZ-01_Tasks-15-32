@@ -16,11 +16,11 @@ public class Main {
         //task03.Start();
 
         // Task 04
-        Task04 task04 = new Task04();
-        task04.Start();
+        //Task04 task04 = new Task04();
+        //task04.Start();
 
         // Task 05
-//        Task05 task05 = new Task05();
-//        task05.Start();
+        Task05 task05 = new Task05();
+        task05.Start();
     }
 }
