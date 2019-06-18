@@ -20,18 +20,15 @@ public class Task04 {
 
         CreatingTestData();
 
-
-        // TODO: заполнить (рандомно)
         FillCubes();
 
-        // TODO: запустить проверку на просветы
         CheckCubeClearance();
-        // TODO: вывести координаты каждого просвета
     }
 
     private void CheckCubeClearance() {
         CheckOnZ();
         CheckOnY();
+        CheckOnX();
     }
 
     private void CheckOnZ() {
@@ -88,6 +85,34 @@ public class Task04 {
             }
         }
     }
+    private void CheckOnX() {
+        for (int y = 0; y < cube.length; y++){
+            for (int z = 0; z < cube.length; z++){
+
+                if (cube[0][y][z] == 0){
+                    for (int x = 0; x < cube.length - 1; x++){
+                        if (cube[x][y][z] == cube[x + 1][y][z]){
+                            // Если не предпоследний
+                            if ((x + 1) != cube.length - 1){
+                                // Проверим следующие кубики в массиве.
+                                continue;
+                            }
+                            else {
+                                // Проверили все кубики в массиве.
+                                // Выводим результат.
+                                System.out.println(" Просвет по X плоскости");
+                                System.out.println(" По координатам: " + "y = " + y + ", z = " + z);
+                            }
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     private void CreatingTestData() {
         arrTest = new LinkedList();
