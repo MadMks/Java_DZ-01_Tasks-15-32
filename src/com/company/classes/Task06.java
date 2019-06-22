@@ -9,10 +9,13 @@ package com.company.classes;
 // - и без.
 // - Сравнить скорости работы.
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Task06 {
 
     private String text = "";
-    private String regex = "";
+    private String regexStr = "";
     private long elapsedTime;
 
     public Task06(){
@@ -21,7 +24,7 @@ public class Task06 {
                 ", ссылка 3: http://site3.com" +
                 ", ссылка 4: https://site4.com" +
                 ", email: mail@site.com";
-        regex = "(" +
+        regexStr = "(" +
                 "([a-qA-Q0-9]*@)" +
                 "|([a-qA-Q0-9]*)" +
                 "|((http|ftp|https):\\/\\/)" +
@@ -49,19 +52,31 @@ public class Task06 {
 
         long startTime = System.currentTimeMillis();
 
-        //
 
+        Pattern pattern = Pattern.compile(regexStr);
+        Matcher matcher = pattern.matcher(str);
+
+        while (matcher.find()){
+            String newStr =
+                new String(
+                    new char[matcher.group().length()])
+                    .replace('\0', '*');
+
+            str = str.replaceFirst(regexStr, newStr);
+        }
+
+        
         long stopTime = System.currentTimeMillis();
         elapsedTime = stopTime - startTime;
 
-        return "TODO: строку передать";
+        return str;
     }
 
     private String ReplaceLinksEmail(String str) {
 
         long startTime = System.currentTimeMillis();
 
-        //
+
 
         long stopTime = System.currentTimeMillis();
         elapsedTime = stopTime - startTime;
