@@ -65,7 +65,7 @@ public class Task06 {
             str = str.replaceFirst(regexStr, newStr);
         }
 
-        
+
         long stopTime = System.currentTimeMillis();
         elapsedTime = stopTime - startTime;
 
@@ -77,10 +77,56 @@ public class Task06 {
         long startTime = System.currentTimeMillis();
 
 
+        int startPos = 0;
+        int endPos = 0;
+
+        for(int i = 0; i < str.length(); i++){
+            // TODO: проверить
+            // - если слева и справа от точки символ
+            if (str.charAt(i) == '.'){
+
+                // Поиск начала ссылки.
+                for (int k = i; k > 0; k--){
+                    // TODO: найти пробел перед ссылкой или '('
+                    if (Character.isWhitespace(str.charAt(k))){
+                        startPos = k;
+                        break;  // выход когда найдем первый пробел перед ссылкой
+                    }
+                }
+
+                // Поиск конца ссылки.
+                for (int k = startPos + 1; k < str.length(); k++){
+                    // TODO: найти пробел после ссылки или ',' или ')'
+                    if (Character.isWhitespace(str.charAt(k))
+                            || str.charAt(k) == ','
+                            || str.charAt(k) == ')'
+                    ){
+                        endPos = k;
+                        break;  // выход когда найдем первый пробел после ссылки
+                    }
+                    else if (str.length() == k + 1){
+                        endPos = k + 1;
+                        break;
+                    }
+                }
+
+                // Замена символов на *
+                str = ReplacingCharactersWithAsterisk(str, startPos, endPos);
+            }
+        }
 
         long stopTime = System.currentTimeMillis();
         elapsedTime = stopTime - startTime;
 
-        return "TODO: строку передать";
+        return str;
+    }
+
+    private String ReplacingCharactersWithAsterisk(String str, int startPos, int endPos) {
+        char[] chars = str.toCharArray();
+        for (int k = startPos + 1; k < endPos; k++){
+            chars[k] = '*';
+        }
+        str = new String(chars);
+        return str;
     }
 }
